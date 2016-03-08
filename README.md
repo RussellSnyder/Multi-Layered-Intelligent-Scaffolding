@@ -6,9 +6,9 @@
 
 ### Goals
 
-1) Make a lightwieght, multi-purpose and highly customizable scaffolding/templating/mockup app that can fit into a wide range of work flows.
-2) Be able to continually integrate new scripts as new frameworks and systems arise without having to rewrite the entire program from scratch (ex. extend scripts used to build express apps to build Angular/Ionic apps).  This does not mean that refactoring on the app will not be done, however.
-3) Build an app with the idea in mind to store and recycle materials (templates,scripts,functions) acquired by a developer or team over long periods of time in a way that is maintaible and accessible.
+1. Make a lightwieght, multi-purpose and highly customizable scaffolding/templating/mockup app that can fit into a wide range of work flows.
+2. Be able to continually integrate new scripts as new frameworks and systems arise without having to rewrite the entire program from scratch (ex. extend scripts used to build express apps to build Angular/Ionic apps).  This does not mean that refactoring on the app will not be done, however.
+3. Build an app with the idea in mind to store and recycle materials (templates,scripts,functions) acquired by a developer or team over long periods of time in a way that is maintaible and accessible.
 
 
 ### Guiding principles
