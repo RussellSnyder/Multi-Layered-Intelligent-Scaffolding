@@ -55,12 +55,17 @@ For ease of typing several commands at in the same scaffolding level, mlis allow
 
 The folder structure is specifically set up for you to hack to your hearts content and refactor later.  All of the custom.js files are completely empty with only the basic require call to the lower level scripts (meso requires micro and macro requres meso, etc...)
 
+*project_root*
 ```
-root
+app[folder]
+app.js
+gulp/grunfile.js
+node_modules[folder]
+package.json
+dev[folder]
 mlis.settings.json
+mlis.js
 -mlis[folder]
---node_modules(shell.js,prompt.js,path.js)
---mlis.js
 --mlis.custom.js
 --supra[folder]
 ---supra.js
@@ -77,9 +82,11 @@ mlis.settings.json
 ------micro.js
 ------micro.custom.js
 ------framework[folder]->micro.knockout.js,micro.ember.js,etc...
+mlis.content.starter[optional-folder]
+mlis.content.project[optional-folder]
 ```
 
-You will notice that in this folder structure, there are no html,css,sass,less, any non-js content!  This is of course by design.  As a user accumulates assets in the form of templates and styles over a project or several projecs, a content folder will become simply too large to be portable between projects.  Also, work related projects might not give permission for their templates to be used by competitors or may contain sensitive information.  For these reaons, the actual templates have been seperated from the logic that generate and place them.  This is another huge differnce between Yeoman and mlis.
+You will notice that in this folder structure, there are no html,css,sass,less,etc... no non-js content!  This is by design.  As a user accumulates assets in the form of templates and styles over a project or several projecs, a content folder will become simply too large to be portable between projects.  Also, work related projects might not give permission for their templates to be used by competitors or may contain sensitive information.  For these reaons, the actual templates have been seperated from the logic that generate and place them.  This is another huge differnce between Yeoman and mlis.
 
 For convienience, there is a [starter content folder here] which if placed at the root of the project allows several "out-of-the-box" projects to be created as well as references for how to make a mlis template for various fields to be prompted.  If content locations are not specified in mlis.settings.json, this is one of the first prompts which will arise when running node mlis.  
 
@@ -258,15 +265,17 @@ mlis will see the function mlis.prompt and send the name to the CLI to prompt th
 In certain situations, a user may not want to replace these handlebar markers, but rather transform them in some way to match the framework langauge currently being used in a project. For example, a setting could be made to store all the prompt variables in a json file with the name of the template to be placed in the same folder and called by the template at runtime.  These options can be set in the mlis.settings.json file in the template options section.
 
 
-#### css templates
+#### CSS templates
 
-#### sass templates
+#### SASS templates
 
-#### html templates
+#### LESS templates
 
-#### jade templates
+#### HTML templates
 
-#### javascript templates
+#### JADE templates
+
+#### JS templates
 
 [Musical Time Scales]: https://slowdensity.files.wordpress.com/2013/05/timescales-diagram.jpg?w=549 "Curtis Roads: Musical Time Scales"
 [starter content folder here]: https://google.com "starter content folder here"
