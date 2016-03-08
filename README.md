@@ -102,5 +102,8 @@ inject views/aboutUs jumbotron/* 'hey checkit' 'represent' '/#contact.html' --st
 
 Naming inspiration
 ------------------
-[Musical-Time-Scale]
-[Musical-Time-Scale]: https://slowdensity.files.wordpress.com/2013/05/timescales-diagram.jpg?w=549 "Curtis Roads: Musical Time Scales"
+The inspiration for the layered approach of control come from Curtis Roads' writings on [Musical Time Scales] as found in his book Microsound which I studied in my MSc.  This layered approach to sonic art composition helped me unlock the computer's potential in art and I hope to continue with this apporach in application development with this project.
+
+
+
+[Musical Time Scales]: https://slowdensity.files.wordpress.com/2013/05/timescales-diagram.jpg?w=549 "Curtis Roads: Musical Time Scales"
