@@ -29,11 +29,17 @@ To help with working only at the root, a four tier shell heiarchy is strictly im
 
 The four levels used in this application are called Micro, Meso, Macro, and Supra.  These levels will be explained in depth in their respctive sections.  In one sentance, the general idea of mlis is that a Supra command is comprised of a series of Macro commands which are themselves comprised of a series of Meso commands which are themselves comprised of a series of Micro commands! However, a use can at any time use a Micro command without referencing a Meso command or a Meso command without referencing a Macro command.  In this way, high code reuse is employed in this app without limiting the level of control a user has.
 
-The inspiration for the layered approach of control come from Curtis Roads' writings on [Musical Time Scales] as found in his book Microsound which I studied in my MSc.  This layered approach to sonic art composition helped me unlock the computer's potential in art and I hope to continue with this apporach in application development with this project.
+## Inspiration
+
+while learning meteorJS from an online tutorial, I watched a professional Meteorite tell me to do the same routine over and over again with each new component.  I make a folder named "whatever" and put a "whatever.js" with "template.Helper = function(1,2,3) { etc ...}" inside next to a "whatever.html" with the an open and closing tag of "<template name="whatever"></template>" and a "whatever.css" style added.  After the tenth, I wrote a shell script did this for me and realized I was now faster and less error prone than my teacher!
+
+At this point, I tried to share my script with somebody.  However, I use windows at work and did not have access to something like a bash_profile to link my scripts to.  The work of frontend development is moving more and more in the direction that if you can't npm install it or bower install it, it's too much trouble for what it's worth.
+
+The layered approach of control came a couple months after the micro prototype was built in pure shell.  The names and concept come from the writings of electronic artist Curtis Roads  about [Musical Time Scales] as found in his book Microsound which I studied extensively in my MSc.  This layered approach to sonic art composition helped me unlock the computer's potential in art and I believe this approach can be very effective in application development.
 
 ### How is this different from Yeoman?
 
-mlis draws a lot of inspiration from Yeoman.  If you don't know Yeoman, check it out.  It's a great tool to kickstart a project.  In fact, the Supra and Macro level commands for mlis should work very similarly to initalizing a project with Yeoman.  
+mlis draws a lot of inspiration from Yeoman.  If you don't know Yeoman, check it out.  It's a great tool to kickstart a project if you are unfamiliar with a framework.  It's how I got started with angular and first got a gruntfile to actually work.  In fact, the supra and macro level commands for mlis should work very similarly to initalizing a project with Yeoman.  
 
 The main differences between mlis and Yeoman is the personalization and level of control a user has when working on thier project made possible through the mlis.settings.json file. Although many Yeoman generators have smaller commands (like 'yo backbone:collection name' in the backbone package to generate a certain structure), not all generators do and even the commands available are not easily modifiable.  Because yeoman generators are installed and run globally, small changes to a yeoman generator will in turn affect all projects using that generator, where changes to an mlis file, because it is stores at the root of every project, will only affect the project you are currently working on.  
 
@@ -43,30 +49,64 @@ MLIS takes a different approach to rapid development to webapps, one that is not
 
 ### How it works
 
-As stated in the goals above, mlis allows a user to drop into virtual shell levels in order to run commands with varying levels of control. All commands can be run from the root level, such as 'supra init', or a user can drop into the supra shell by simply typing 'supra'.  This is particularly handy when running several commands in succession at the micro level. 
+mlis tries to keep the user in one CLI the entire time while it makes the magic happen.  If a detail is not given or the user gives a ? instead of an argument, instead of just failing, a prompt appears either asking for the variable again or listing all the options available.  
+
+For ease of typing several commands at in the same scaffolding level, mlis allows a user to drop into virtual shell levels in order to run commands with varying levels of control. All commands can be run from the root level, such as 'supra init' or 'micro mkdir', or a user can drop into the meso shell by simply typing 'meso' and hitting enter.  This is particularly useful when running several commands in succession at the micro level. 
+
+The folder structure is specifically set up for you to hack to your hearts content and refactor later.  All of the custom.js files are completely empty with only the basic require call to the lower level scripts (meso requires micro and macro requres meso, etc...)
+
+```
+root
+mlis.settings.json
+-mlis[folder]
+--node_modules(shell.js,prompt.js,path.js)
+--mlis.js
+--mlis.custom.js
+--supra[folder]
+---supra.js
+---supra.custom.js
+---macro[folder]
+----macro.js
+----macro.custom.js
+----framework[folder]->macro.meteor.js,macro.angular.js,etc...
+----meso[folder]
+-----meso.js
+-----meso.custom.js
+-----framework[folder]->meso.express.js,meso.backbone.js,etc...
+-----micro[folder]
+------micro.js
+------micro.custom.js
+------framework[folder]->micro.knockout.js,micro.ember.js,etc...
+```
+
+You will notice that in this folder structure, there are no html,css,sass,less, any non-js content!  This is of course by design.  As a user accumulates assets in the form of templates and styles over a project or several projecs, a content folder will become simply too large to be portable between projects.  Also, work related projects might not give permission for their templates to be used by competitors or may contain sensitive information.  For these reaons, the actual templates have been seperated from the logic that generate and place them.  This is another huge differnce between Yeoman and mlis.
+
+For convienience, there is a [starter content folder here] which if placed at the root of the project allows several "out-of-the-box" projects to be created as well as references for how to make a mlis template for various fields to be prompted.  If content locations are not specified in mlis.settings.json, this is one of the first prompts which will arise when running node mlis.  
+
+If you have an awesome template that you developed and you wish to share it with the mlis community, please fork the start content project and insert your template and fork the mlis project to add any specialized logic that is needed to accomplish your templates.  A gallery is coming soon to display all the different starter content and commands to create and customize them.
 
 General
 ---
 
-Because mlis runs on node, you just need to type 
+Because mlis is a CLI based app and runs on node, you just need to type these two words while in the root of your project to get started:  
 ```javascript
 node mlis
 ```
-to begin the mlis application
-
 In general, commands on all level follow this pattern:
 
 0. which level *(see note below),
 1. what action (verbs),
-2. where (location from mlis.settings.json),
-3. what content (nouns),
+2. where (location from mlis.settings.json)(prompted for if needed and not given),
+3. what content (nouns)(prompted for if needed and not given),
 4. optional arguments (prompted for if needed and not given)
 
 *Because a user will often want to make multiple commands in succession at a given level of control, a user can type just the level they wish to work in (supra, macro, meso, micro), and drop into a virutal shell.  This effectively can skip the '0' level as noted above.  To get back to the virtual root level, run the mlis command or any other level (like meso or supra) to change levels.
 
-explicit Supra commands or setting in the mlis.settings.json can be activated to document exactly which commands are being run when in order to track progress and help refactor future commands.  Alternatively, a supra command can also be run to guess which scripts have been run based on tag and pattern recognition.
+At anytime a user is uncertain of how to continue with a command, they can simply type ? to recieve a prompt with a list of possible commands that would complete what is already typed or a list of all possible commands at the current stage in the build process.
 
-## Level Specifications
+Explicit Supra commands or setting in the mlis.settings.json can be activated to document exactly which commands are being run when in order to track progress and help refactor future commands.  Alternatively, a supra command can also be run to guess which scripts have been run based on tag and pattern recognition and document them retroactively.
+
+# Level Specifications
 
 Supra
 ---
@@ -139,13 +179,15 @@ or have each component broken into three  folder while I like to have my compone
 ```javascript
 mkdirstr component form contact
 ```
--read from settings.mlis.json to detect which framework we are working in.  In this case, it is angular, so this command creates a contact.component.js, contact.html, and a contact.css file in a contact folder in the directory location for components given in the settings.mlis.json.  
+-read from settings.mlis.json to detect which framework we are working in. 
+-If there is a script called mkdirstr in the framworks folder at this level, it will be called instead of the generic call.  
+-In this case, the framework is angular so the component function in frameworks/angular.js is called which creates a contact.component.js, contact.html, and a contact.css file in a contact folder in the directory location for components given in the settings.mlis.json.  
 -this particular script would lead to a series of prompts such as 'field name 1','required?','another field?' with suggestions for each step.  optional arguments can be put in from the command line initially to avoid these prompts. 
 
-if not framework was given in settings.mlis.json or any other part of a command is missing, a user will be prompted to enter something the mlis understands and/or be given options which they can choose.  
+If no framework was given in settings.mlis.json or any other part of a command is missing, a user will be prompted to enter something the mlis understands and/or be given options which they can choose.  
 
 Let's say a user has already specified they are working on an angular project in their settings.mlis.json file but wishes to take a Meso routine from an used when working with the express framework, but can't remember which routine it was, but remembers all the arguments!  
-No worries, you can run 
+No worries, you can run:
 ```javascript
 mkdirstr express:? form contact name:placeholder:"Joe Smith":required email:placeholder:"yourname@whatevs.com" sendemailto:'DjRussRuss@beastdj.com'
 ```
@@ -154,39 +196,77 @@ a prompt will appear giving you the options of which express Meso script you are
 
 Micro  
 ---
-	This is ths meat and potatoes of mlis.  You will find that many of these commands are simply shell commands with more flavor and personalization.
+This is ths meat and potatoes of mlis.  You will find that many of these commands are simply shell commands with more flavor and personalization.  
 
 Micro example commands
 
 mkdir views aboutUs
 	
-	-this will make a folder in the views directory (specified in the settings.mlis.json file) called aboutUs.  
-	-if views is not specified in settings.mlis.json, a prompt will appear to ask where views is and it will be written into settings.mlis.json for future use.
+-this will make a folder in the views directory (specified in the settings.mlis.json file) called aboutUs.  
+-if views is not specified in settings.mlis.json, a prompt will appear to ask where views is and it will be written into settings.mlis.json for future use.
 
 touch views/aboutUS aboutUs.jade
 
-	-this will make a aboutUs.jade 
+-this will make a aboutUs.jade 
 
 inject views/aboutUs aboutUs.jade jumbotron/standard 'hey check us out' 'we are number one' '/#contact.html' --style red
 
-	-this will inject a jumbotron into aboutUs.jade (in the jade format as specified in the settings.mlis.json file) with the first line as 'hey check us out', button text 'we are number one' and link to '/#contact.html'
-	-the 'style' flag with the argument red will add a css snippet in the location specified in settings.mlis.json.  This could be in a master styles file or a new _jumbotron.scss file creates and an @import injected into a master styles.scss
-	-mlis searchs for the template jumbotron in the folders given as the root for content in the settings.mlis.json
+-this will inject a jumbotron into aboutUs.jade (in the jade format as specified in the settings.mlis.json file) with the first line as 'hey check us out', button text 'we are number one' and link to '/#contact.html'
+-the 'style' flag with the argument red will add a css snippet in the location specified in settings.mlis.json.  This could be in a master styles file or a new _jumbotron.scss file creates and an @import injected into a master styles.scss
+-mlis searchs for the template jumbotron in the folders given as the root for content in the settings.mlis.json
 
 inject views/aboutUs aboutUs.jade jumbotron/?
 
-	-this will lead to a series of prompts about which jumbotron to use and which variables a user would like to insert. Suggestions will be given so that a rapid sucessions of returns will generate pleasant content.
+-this will lead to a series of prompts about which jumbotron to use and which variables a user would like to insert. Suggestions will be given so that a rapid sucessions of returns will generate pleasant content.
 
 inject views/aboutUs jumbotron/* 'hey checkit' 'represent' '/#contact.html' --style turquoise
 
-	-this will lead to an injection of every jumbotron in the jumbotron folder with the arguments passed into each
-	-if a variable is needed for a particular jumbotron, it will be prompted for before proceeding.
+-this will lead to an injection of every jumbotron in the jumbotron folder with the arguments passed into each
+-if a variable is needed for a particular jumbotron, it will be prompted for before proceeding.
 
 
-Naming inspiration
+## Template generation
 ---
 
+mlis already relies on many underscore.js functions to maximize code reuse between levels, so it was a natural choice to use underscore's built in templating language as a starting point for building templates.  
+
+although pure underscore templating can still be implemented on templates, the mlis starter templates extends underscores templating engine with handlebars.js to create more semantically readable templates.
+
+when an inject function is called to retrieve content from the content folder and place it into a file, mlis scans the template for special markers with the helper function mlis.prompt to either take and place arguments given in CLI or ask the user for input.
+
+for example, if we have an about us page, the top of the about_01.html file may looks like this: 
+```html
+	<h1>{{ mlis.prompt name="title" }}</h1>
+	<h2>{{ mlis.prompt name="sub-title" }}</h2>
+	<div class="{{mlis.prompt.title}}">
+		{{ mlis.prompt name="content" options=input|mock loop=true as="paragraph" }}
+			{{#each content }}
+				<p>{{ mlis.prompt.content.paragraph }}</p>
+			{{/each}}
+		{{ mlis.prompt name="find out more" options=Y|n as=FOM }}
+		{{#if findOutMore}}
+			<a href="{{ FOM.prompt name='link'}}"
+			class="btn btn-{{ FOM.prompt name='button-type' 
+			options=default|success|warning|error }}">
+				{{ FOM.prompt name="find out more text" as="FOMT" }}{{FOMT}}
+			</a>
+		{{/if}}
+	</div>
+````
+mlis will see the function mlis.prompt and send the name to the CLI to prompt the user.  Default options can be given with the options argument.  If the loop variable is set to true, the prompt will call the loop prompt "another {name}?" and if yes (the default), the prompt will be called again until a user types 'no' to the "another {name}?" prompt.   
+
+In certain situations, a user may not want to replace these handlebar markers, but rather transform them in some way to match the framework langauge currently being used in a project. For example, a setting could be made to store all the prompt variables in a json file with the name of the template to be placed in the same folder and called by the template at runtime.  These options can be set in the mlis.settings.json file in the template options section.
 
 
+#### css templates
+
+#### sass templates
+
+#### html templates
+
+#### jade templates
+
+#### javascript templates
 
 [Musical Time Scales]: https://slowdensity.files.wordpress.com/2013/05/timescales-diagram.jpg?w=549 "Curtis Roads: Musical Time Scales"
+[starter content folder here]: https://google.com "starter content folder here"
