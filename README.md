@@ -36,7 +36,9 @@ Supra
 
 Supra example commands:
 
+```node
 map projectName
+```
 
 	-create a JSON object with the folder structure and recognizable content within files.  if a structure is not recognized, the user is prompted to write what it is.
 
