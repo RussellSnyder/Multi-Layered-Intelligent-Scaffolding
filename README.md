@@ -1,8 +1,8 @@
-Multi-Layered, Intelligent Scaffolding
+# Multi-Layered, Intelligent Scaffolding
 
-A helpful and friendly node based tool to help individuals/teams create and maintain highly personalized web apps 
+## A helpful and friendly node based tool to help individuals/teams create and maintain highly personalized web apps 
 
-*This project is only at the conceptual stages at this point.  We hope to release the first batch of Micro commands and work our way up from there. *
+_This project is only at the conceptual stages at this point.  We hope to release the first batch of Micro commands and work our way up from there. _
 
 The goal
 
