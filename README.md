@@ -2,7 +2,7 @@
 
 ## A helpful and friendly node based tool to help individuals/teams create and maintain highly personalized web apps 
 
-_This project is only at the conceptual stages at this point.  We hope to release the first batch of Micro commands and work our way up from there. _
+** This project is only at the conceptual stages at this point.  We hope to release the first batch of Micro commands and work our way up from there.  If you want to contribute let me know! **
 
 The goal
 
@@ -99,3 +99,8 @@ inject views/aboutUs jumbotron/* 'hey checkit' 'represent' '/#contact.html' --st
 	-this will lead to an injection of every jumbotron in the jumbotron folder with the arguments passed into each
 	-if a variable is needed for a particular jumbotron, it will be prompted for before proceeding.
 
+
+Naming inspiration
+------------------
+[Musical-Time-Scale]
+[Musical-Time-Scale]: https://slowdensity.files.wordpress.com/2013/05/timescales-diagram.jpg?w=549 "Curtis Roads: Musical Time Scales"
