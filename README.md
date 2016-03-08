@@ -31,38 +31,41 @@ How it works
 
 
 Supra
-
+---
 	These commands will come only after all of the Macro, Meso and Micro commands are developed.  Theoretical commands will be as follows. 
 
-Supra example commands:
+#### Supra example commands:
 
-```node
+```javascript
 map projectName
 ```
+-create a JSON object with the folder structure and recognizable content within files.  
+-if a structure is not recognized, the user is prompted to write what it is.
 
-	-create a JSON object with the folder structure and recognizable content within files.  if a structure is not recognized, the user is prompted to write what it is.
-
+```javascript
 init projectNmae
+```
+-reads settings.mils.json to create a project passing in the 
+-prompt the user for variables that are left out of the json file. These are then written into the json file.
 
-	-reads settings.mils.json to create a project passing in the 
-	-prompt the user for variables that are left out of the json file. These are then written into the json file.
-
+```javascript
 share (style)
-	
-	-creates a JSON of the folder structure is one does not exist
-	-Generates a 'projectName_share' folder with an index.html, projectName.css, and projectName.js.  These files will generate a small website to convey the structure and content of the project.  
+```	
+-creates a JSON of the folder structure is one does not exist
+-Generates a 'projectName_share' folder with an index.html, projectName.css, and projectName.js.  
+-launch a small website to convey the structure and content of the project to project leaders or collaborators.  
 
 Macro
-
+---
 	These commands are most similar to Yeoman commands.  They focus on generating build systems and large scale scaffolding.  Ideally, a single command is a composition of Meso commands (which are in turn a composition of Micro commands).
 
-Macro example commands 
+#### Macro example commands 
 
 Meso
-
+---
 	These commands are where the 'best practices' of various frameworks begin to be seen.  Here is where you can generate multiple files and folders in one go that share variables between them.  Meso commands are basically a composition of Mico commands which share variables.  
 
-Meso example commands
+#### Meso example commands
 
 mkdirstr component form contact
 
@@ -72,7 +75,7 @@ mkdirstr component form contact
 
 
 Micro  
-
+---
 	This is ths meat and potatoes of MILS.  You will find that many of these commands are simply shell commands with more flavor and personalization.
 
 Micro example commands
@@ -103,7 +106,7 @@ inject views/aboutUs jumbotron/* 'hey checkit' 'represent' '/#contact.html' --st
 
 
 Naming inspiration
-------------------
+---
 The inspiration for the layered approach of control come from Curtis Roads' writings on [Musical Time Scales] as found in his book Microsound which I studied in my MSc.  This layered approach to sonic art composition helped me unlock the computer's potential in art and I hope to continue with this apporach in application development with this project.
 
 
